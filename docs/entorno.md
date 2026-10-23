@@ -16,24 +16,34 @@
 Resultado de `java -version` y `node -v` **antes** de instalar nada:
 
 ```
-pega aquí
+$ java -version
+bash: java: command not found
+$ node -v
+bash: node: command not found
 ```
 
 ¿Por qué crees que aparece ese mensaje? (relaciónalo con la diapositiva «Problemas habituales del entorno»)
 
-> 
+> El entorno está vacío: en devcontainer.json solo hay una imagen base (un Ubuntu mínimo, base:jammy) y no se ha añadido ninguna feature, así que Java y Node.js no están instalados. Cuando escribo java o node, la terminal busca ese programa en las carpetas del PATH y, como no lo encuentra, responde «command not found». Es el síntoma «Comando no encontrado» de la diapositiva de problemas habituales del entorno, pero aquí no es un fallo: simplemente todavía no hemos instalado los lenguajes. Se solucionará al añadir sus features a la receta y reconstruir el entorno.
 
 ### 1.2. Después de la 1.ª reconstrucción (paso 5)
 
 Resultado de `java -version`, `node -v` y `jupyter lab --version` **después**:
 
 ```
-pega aquí
+$ java -version
+openjdk version "27" 2026-09-15
+OpenJDK Runtime Environment Temurin-27+35 (build 27+35)
+OpenJDK 64-Bit Server VM Temurin-27+35 (build 27+35, mixed mode, sharing)
+$ node -v
+v24.22.1
+$ jupyter lab --version
+4.6.4
 ```
 
 ¿Qué líneas nuevas han aparecido en `devcontainer.json`? Explica con tus palabras qué hace cada una:
 
-> 
+> Ha aparecido el bloque "features", que es la lista de módulos que se instalan en el contenedor al reconstruirlo. Dentro hay tres líneas: "java:1" instala Java (el JDK, con el compilador javac); "node:1" instala Node.js con npm; y "python:1" instala Python, y con la opción "installJupyterlab": true también el IDE JupyterLab. Las llaves vacías {} significan que se usan las opciones por defecto, es decir, la versión que trae cada feature. Además, la línea "image" ahora lleva una coma al final porque ya no es el último elemento del JSON.
 
 ### 1.3. Comparativa de los dos IDE (paso 6)
 
