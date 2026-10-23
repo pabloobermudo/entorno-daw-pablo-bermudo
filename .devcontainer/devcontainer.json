@@ -7,5 +7,13 @@
     "ghcr.io/devcontainers/features/python:1": {
       "installJupyterlab": true
     }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "streetsidesoftware.code-spell-checker",
+        "vscjava.vscode-java-pack"
+      ]
+    }
   }
 }
